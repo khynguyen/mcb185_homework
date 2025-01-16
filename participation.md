@@ -31,7 +31,7 @@ more than one point per category. There is a maximum of 5 points each week.
 	+ Went to class Tuesday
 	+ Went to class Thursday
 	+ Introduced myself to Jule (Joule?), who was sitting on my right
-	+ Introduced myself to another girl on my left, I can't remember her name. I think it was Leah?
+	+ Introduced myself to another girl on my left, I can't remember her name. I think it was Liane?
 	+ Total points: 4
 - Week 2
 	+ Went to class Tuesday
