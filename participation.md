@@ -37,6 +37,7 @@ more than one point per category. There is a maximum of 5 points each week.
 	+ Went to class Tuesday
 	+ Went to class Thursday
 	+ I met Cordealia on Thursday 
+	Total points: 3
 - Week 3
 - Week 4
 - Week 5
