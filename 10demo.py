@@ -58,6 +58,14 @@ print(circle_area(3))
 print(rectangle_area(3, 5))
 print(triangle_area(3,5))
 
+def f2c(f): return (32 - f) * 5/9
+print(f2c(98.6))
+
+def m2k(m): return m * 0.62
+print(m2k(1000))
+
+def dna_conc(od, df): return od * df * 50
+print(dna_conc(2, 6))
 #strings
 s = 'hello world'
 print(s)
