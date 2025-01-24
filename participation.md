@@ -28,17 +28,22 @@ more than one point per category. There is a maximum of 5 points each week.
 	+ Didn't come to class Thursday to save you from getting sick
 	+ Total 4 points
 - Week 1
-	+ Went to class Tuesday
-	+ Went to class Thursday
+	+ Went to class on Tuesday
+	+ Went to class on Thursday
 	+ Introduced myself to Jule (Joule?), who was sitting on my right
 	+ Introduced myself to another girl on my left, I can't remember her name. I think it was Liane?
 	+ Total points: 4
 - Week 2
-	+ Went to class Tuesday
-	+ Went to class Thursday
+	+ Went to class on Tuesday
+	+ Went to class on Thursday
 	+ I met Cordealia on Thursday 
-	Total points: 3
+	+ Total points: 3
 - Week 3
+	+ Went to class on Tuesday
+	+ Got assessed in class on Tuesday
+	+ Went to class Thursday
+	Introduced myself to DQ
+	+ Total points: 4
 - Week 4
 - Week 5
 - Week 6
