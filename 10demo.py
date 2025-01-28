@@ -36,7 +36,7 @@ hyp = pythagoras(3, 4)
 print(hyp)
 
 def pythagoras2(a, b):
-        return math.sqrt(a**2 + b**2)
+    return math.sqrt(a**2 + b**2)
 
 print(pythagoras2(3, 4))
 

@@ -45,6 +45,9 @@ more than one point per category. There is a maximum of 5 points each week.
 	+ Introduced myself to DQ
 	+ Total points: 4
 - Week 4
+	+ Did a Unit 1 assessment Monday night 
+	+ Went to class on Tuesday 
+	+ Went to class on Thursday
 - Week 5
 - Week 6
 - Week 7
