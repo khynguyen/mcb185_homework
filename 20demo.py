@@ -1,6 +1,7 @@
 # 20demo.py by Karen Nguyen
 
 import math
+import random
 
 #tuples
 t = 1, 2
@@ -124,10 +125,10 @@ print(is_prime(31))
 	
 def estimate_pi(n):
 	pi = 3
-	for i in range(n + 1):
+	for i in range(n):
 		num = (-1) ** i
 		denom = (2*i + 2) * (2*i + 3) * (2*i + 4)
-		pi = pi + 4* num/denom
+		pi = pi + 4 * num/denom
 	return pi 
 
 def nilakantha(limit):
@@ -148,3 +149,68 @@ print(nilakantha(9))
 print(nilakantha(14))
 
 #random numbers 
+for i in range(5):
+	print(random.random())
+	
+for i in range(3):
+	print(random.randint(1, 6))
+
+#monty pi-thon
+total = 0
+pi = 0
+for i in range(10):
+	x = random.random()
+	y = random.random()
+	distance = (x**2 + y**2) ** 0.5
+	if distance < 1: pi += 1
+	total += 1
+	print(4*pi / total)
+
+#d&d stats - 3D6
+total = 0
+for i in range(3):
+	x = random.randint(1, 6)
+	print(x)
+	total = total + x
+
+print(total)
+
+#d&d stats - 3D6R1
+total = 0
+i = 1
+while i < 4:
+	x = random.randint(1, 6)
+	print(x)
+	if x == 1: continue
+	if x != 1:
+		total += x
+		i += 1
+
+print(total)
+
+#d&d stats - 3D6x2
+total = 0
+for i in range(3):
+	a = random.randint(1, 6) 
+	b = random.randint(1, 6)
+	print(a, b)
+	if a > b: total += a 
+	else: total += b
+
+print(total)
+
+#d&d stats - 4D6d1
+total = 0
+a = random.randint(1, 6)
+b = random.randint(1, 6)
+c = random.randint(1, 6)
+d = random.randint(1, 6)
+print(a, b, c, d)
+if a <= b and a <= c and a <= d: total = b + c + d
+elif b <= a and b <= c and b <= d: total = a + c + d
+elif c <= a and c <= b and c <= d: total = a + b + d
+elif d <= a and d <= b and d <= c: total = a + b + c
+
+print(total)
+
+#assessment examples
