@@ -50,6 +50,10 @@ more than one point per category. There is a maximum of 5 points each week.
 	+ Went to class on Thursday
 	+ Total points: 3
 - Week 5
+	+ Went to class on Tuesday
+	+ Did a Unit 2 assessment Wednesday night
+	+ Went to class on Thursday
+	+ Total points: 3
 - Week 6
 - Week 7
 - Week 8
