@@ -162,55 +162,120 @@ for i in range(10):
 	x = random.random()
 	y = random.random()
 	distance = (x**2 + y**2) ** 0.5
-	if distance < 1: pi += 1
+	if distance <= 1: pi += 1
 	total += 1
 	print(4*pi / total)
 
 #d&d stats - 3D6
+def roll3():
+	r1 = random.randint(1, 6)
+	r2 = random.randint(1, 6)
+	r3 = random.randint(1, 6)
+	total = r1 + r2 + r3
+	return total
+
 total = 0
-for i in range(3):
-	x = random.randint(1, 6)
-	print(x)
-	total = total + x
+n = 10
+for i in range(1, n + 1):
+	total = total + roll3()
+	ave = total / i
+	print(ave)
 
-print(total)
+#d&d stats - 3D6r1
+def reroll_1():
+	total = 0
+	i = 1
+	while i < 4:
+		roll = random.randint(1, 6)
+		if roll > 1: 
+			total += roll 
+			i += 1
+		else: continue 
+	return total 
 
-#d&d stats - 3D6R1
 total = 0
-i = 1
-while i < 4:
-	x = random.randint(1, 6)
-	print(x)
-	if x == 1: continue
-	if x != 1:
-		total += x
-		i += 1
-
-print(total)
+n = 10
+for i in range(1, n + 1):
+	total = total + reroll_1()
+	ave = total / i 
+	print(ave)
 
 #d&d stats - 3D6x2
-total = 0
-for i in range(3):
-	a = random.randint(1, 6) 
-	b = random.randint(1, 6)
-	print(a, b)
-	if a > b: total += a 
-	else: total += b
+def max2():
+	r1 = random.randint(1, 6)
+	r2 = random.randint(1, 6)
+	if r1 > r2: return r1
+	return r2 
 
-print(total)
+total = 0 
+n = 10 
+for i in range (1, n + 1):
+	r1 = max2()
+	r2 = max2()
+	r3 = max2()
+	total = total + r1 + r2 + r3
+	ave = total / i 
+	print(ave)
 
 #d&d stats - 4D6d1
-total = 0
-a = random.randint(1, 6)
-b = random.randint(1, 6)
-c = random.randint(1, 6)
-d = random.randint(1, 6)
-print(a, b, c, d)
-if a <= b and a <= c and a <= d: total = b + c + d
-elif b <= a and b <= c and b <= d: total = a + c + d
-elif c <= a and c <= b and c <= d: total = a + b + d
-elif d <= a and d <= b and d <= c: total = a + b + c
+def drop_one():
+	total = 0 
+	a = random.randint(1, 6)
+	b = random.randint(1, 6)
+	c = random.randint(1, 6)
+	d = random.randint(1, 6)
+	print(a, b, c, d)
+	if a <= b and a <= c and a <= d: total = b + c + d
+	elif b <= a and b <= c and b <= d: total = a + c + d
+	elif c <= a and c <= b and c <= d: total = a + b + d
+	elif d <= a and d <= b and d <= c: total = a + b + c
+	return total 
 
-print(total)
+total = 0 
+n = 10 
+for i in range(1, n + 1):
+	total = total + drop_one()
+	ave = total / i 
+	print(ave)
 
 #assessment examples
+for i in range(1, 101):
+	if i % 5 == 0 and i % 3 == 0: print('fizzbuzz')
+	elif i % 3 == 0: print('fizz')
+	elif 1 % 5 == 0: print('buzz')
+	else: print(i)
+	
+#i = 0
+#pi = 0 
+#while True: 
+#	a = (-1) ** i
+#	b = 2*i + 1
+#	pi = pi + a / b
+#	print(4*pi)
+#	i += 1
+
+def greg(n):
+	i = 0 
+	pi = 0 
+	for i in range(n + 1):
+		a = (-1) ** i
+		b = 2*i + 1
+		pi = pi + a / b
+		i += 1
+	return pi*4 
+	
+print(greg(10))	
+print(greg(100))
+print(greg(1000))
+
+diff = 1
+i = 0 
+pi = 0
+while diff > 1e-3:
+	a = (-1) ** i
+	b = 2*i + 1
+	pi = pi + a / b
+	pix4 = 4*pi
+	print(pix4)
+	diff = abs(math.pi - pix4)
+	i += 1

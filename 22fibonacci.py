@@ -41,3 +41,14 @@ fib = 0
 for i in range(10):
 	print(a)
 	a, b = b, a + b
+	
+#for loop version 
+a = 0 
+b = 1
+for i in range(10):
+	if i < 2: print(i)
+	else: 
+		fibonacci = a + b 
+		print(fibonacci)
+		a = b
+		b = fibonacci
