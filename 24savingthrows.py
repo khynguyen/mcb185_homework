@@ -2,38 +2,50 @@
 
 import random
 
-def saving_throw(dc):
-	dice = random.randint(1, 20)
-	print(dice)
-	if dice >= dc: return 'saved!'
-	return 'aww :/'
+def advantage():
+	roll1 = random.randint(1, 20)
+	roll2 = random.randint(1, 20) 
+	if roll1 > roll2: return roll1 
+	return roll2
 
-def advantage(dc):
-	dice1 = random.randint(1, 20)
-	dice2 = random.randint(1, 20)
-	print('dice 1: ', dice1)
-	print('dice 2: ', dice2)
-	if dice1 > dice2 and dice1 >= dc: return 'saved!'
-	elif dice2 >= dice1 and dice2 >= dc: return 'saved!'
-	return 'aww :/'
+def disadvantage():
+	roll1 = random.randint(1, 20)
+	roll2 = random.randint(1, 20) 
+	if roll1 < roll2: return roll1 
+	return roll2
+	
+trials = 10000
+dc = 5
 
-def disadvantage(dc):
-	dice1 = random.randint(1, 20)
-	dice2 = random.randint(1, 20)
-	print('dice 1: ', dice1)
-	print('dice 2: ', dice2)
-	if dice1 < dice2 and dice1 >= dc: return 'saved!'
-	elif dice2 <= dice1 and dice2 >= dc: return 'saved!'
-	return 'aww :/'
+for dc in range(5, 16, 5):
+	success = 0
+	for i in range(trials):
+		roll = random.randint(1, 20)
+		if roll >= dc: success += 1
+	print(dc, success / trials)
+	
+for dc in range(5, 16, 5):
+	success = 0
+	for i in range(trials):
+		roll = advantage()
+		if roll >= dc: success += 1
+	print(dc, success / trials)
 
-print(saving_throw(5))
-print(saving_throw(10))
-print(saving_throw(15))
-
-print(advantage(5))
-print(advantage(10))
-print(advantage(15))
-
-print(disadvantage(5))
-print(disadvantage(10))
-print(disadvantage(15))
+for dc in range(5, 16, 5):
+	success = 0
+	for i in range(trials):
+		roll = disadvantage()
+		if roll >= dc: success += 1
+	print(dc, success / trials)
+	
+for dc in range(5, 16, 5):
+	nor = 0
+	adv = 0 
+	dis = 0 
+	for i in range(trials):
+		r1 = random.randint(1,20)
+		r2 = random.randint(1,20)
+		if r1 >= dc: nor += 1
+		if r1 >= dc and r2 >= dc: dis += 1
+		if r1 >= dc or r2 >= dc: adv += 1
+	print(dc, nor/trials, adv/trials, dis/trials)
