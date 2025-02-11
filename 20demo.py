@@ -123,7 +123,7 @@ print(is_prime(8))
 print(is_prime(15))
 print(is_prime(31))
 	
-def estimate_pi(n):
+def estimate_pi(n): #my attempt
 	pi = 3
 	for i in range(n):
 		num = (-1) ** i
@@ -131,7 +131,7 @@ def estimate_pi(n):
 		pi = pi + 4 * num/denom
 	return pi 
 
-def nilakantha(limit):
+def nilakantha(limit): #drkorf ans 
     pi = 3
     for i in range(1, limit+1):
         n = 2 * i
@@ -165,6 +165,43 @@ for i in range(10):
 	if distance <= 1: pi += 1
 	total += 1
 	print(4*pi / total)
+	
+#old version of 24saving throws 
+def saving_throw(dc):
+	dice = random.randint(1, 20)
+	print(dice)
+	if dice >= dc: return 'saved!'
+	return 'aww :/'
+
+def advantage(dc):
+	dice1 = random.randint(1, 20)
+	dice2 = random.randint(1, 20)
+	print('dice 1: ', dice1)
+	print('dice 2: ', dice2)
+	if dice1 > dice2 and dice1 >= dc: return 'saved!'
+	elif dice2 >= dice1 and dice2 >= dc: return 'saved!'
+	return 'aww :/'
+
+def disadvantage(dc):
+	dice1 = random.randint(1, 20)
+	dice2 = random.randint(1, 20)
+	print('dice 1: ', dice1)
+	print('dice 2: ', dice2)
+	if dice1 < dice2 and dice1 >= dc: return 'saved!'
+	elif dice2 <= dice1 and dice2 >= dc: return 'saved!'
+	return 'aww :/'
+
+print(saving_throw(5))
+print(saving_throw(10))
+print(saving_throw(15))
+
+print(advantage(5))
+print(advantage(10))
+print(advantage(15))
+
+print(disadvantage(5))
+print(disadvantage(10))
+print(disadvantage(15))
 
 #d&d stats - 3D6
 def roll3():
@@ -255,13 +292,11 @@ for i in range(1, 101):
 #	i += 1
 
 def greg(n):
-	i = 0 
 	pi = 0 
 	for i in range(n + 1):
 		a = (-1) ** i
 		b = 2*i + 1
 		pi = pi + a / b
-		i += 1
 	return pi*4 
 	
 print(greg(10))	
@@ -274,8 +309,8 @@ pi = 0
 while diff > 1e-3:
 	a = (-1) ** i
 	b = 2*i + 1
-	pi = pi + a / b
-	pix4 = 4*pi
-	print(pix4)
-	diff = abs(math.pi - pix4)
+	greg = pi + a / b
+	pi = 4*greg
+	print(pi)
+	diff = abs(math.pi - pi)
 	i += 1
