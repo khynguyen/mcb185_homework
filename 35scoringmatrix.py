@@ -13,6 +13,7 @@ for let in letters:
 	print('  ', let, end='')
 print()
 
+#compare the letters
 for nt1 in letters:
 	print(nt1, end=' ')
 	for nt2 in letters: 
