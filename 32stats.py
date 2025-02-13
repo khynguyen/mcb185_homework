@@ -30,6 +30,15 @@ sd = 0
 for num in stats: sd += (num - mean) ** 2
 sd = math.sqrt(sd / num_values)
 
+#assessment example: N50 calculation
+half = total / 2 #from mean calculation
+n50 = 0 
+for num in stats[::-1]:
+	n50 += num 
+	if n50 >= half: 
+		n50 = num
+		break
+
 #printing things in an easy to read way
 print('values:', stats)
 print('number of values:', num_values)
@@ -38,3 +47,4 @@ print('maxium value:', maximum)
 print('mean:', mean)
 print('standard deviation:', sd)
 print('median value:', median)
+print('N50:', n50)
