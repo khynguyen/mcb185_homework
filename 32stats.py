@@ -18,7 +18,7 @@ else: median = stats[middle]
 #get length, min, and max
 num_values = len(stats)
 minimum = stats[0]
-maximum = stats[len(stats) - 1]
+maximum = stats[len(stats) - 1] #or stats[-1]
 
 #get mean
 total = 0 
