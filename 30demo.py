@@ -254,7 +254,7 @@ p2 = (0.1, 0.3, 0.4, 0.2)
 print(kullback(p1, p2))
 
 #command line data 
-	#remember to import sys 
+#remember to import sys 
 print(sys.argv)
 
 #converting types
@@ -263,3 +263,20 @@ x = float('0.61385')
 print(i * x)
 
 print(type(i), type(x), type(i * x))
+
+#assessment example
+dna = 'ATGCTGTAA'
+	
+nts = list(dna)
+
+for i in range(1, len(nts) + 1):
+	frame = 0 
+	if i % 3 == 0: frame = 3
+	elif (i + 1) % 3 == 0: frame = 2
+	else: frame = 1
+	
+	codon = nts[i - 1: i + 2]
+	codon = ''.join(codon)
+	if len(codon) < 3: break
+	
+	print(i, frame, codon)
