@@ -26,3 +26,19 @@ for i in range(trials):
 
 prob = matches / trials
 print(prob)
+
+#shortening it 
+matches = 0
+for i in range(trials):
+	calendar = []
+	for i in range(days): calendar.append(0)
+	
+	for i in range(people):
+		birthday = random.randint(0, days - 1)
+		if calendar[birthday] == 1:
+			matches += 1
+			break
+		calendar[birthday] += 1
+
+prob = matches / trials
+print(prob)

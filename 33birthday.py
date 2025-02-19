@@ -52,7 +52,6 @@ prob = matches / trials
 print(prob)
 
 #solution 2 done in class 2/18
-#more efficient but it doesn't seem to give me the same number as the first 2
 random.seed(9)
 matches = 0
 for i in range(trials):
