@@ -264,7 +264,7 @@ print(i * x)
 
 print(type(i), type(x), type(i * x))
 
-#assessment example
+#assessment example before i did the assessment
 dna = 'ATGCTGTAA'
 	
 nts = list(dna)
@@ -280,3 +280,46 @@ for i in range(1, len(nts) + 1):
 	if len(codon) < 3: break
 	
 	print(i, frame, codon, sep='\t')
+
+#assessment code after i got assessed
+dna = 'ATGCTGTAA'
+
+frame = 1 
+for i in range(len(dna)):
+	codon = dna[i: i + 3]
+	if len(codon) < 3: break
+	
+	print(i + 1, frame, codon, sep='\t')
+	
+	if frame == 3: frame = 1
+	else: frame += 1
+
+print()
+
+for i in range(1, len(dna) + 1):
+	frame = 1
+	if i % 3 == 0: frame = 3
+	elif (i + 1) % 3 == 0: frame = 2
+	else: frame = 1
+	
+	codon = dna[i - 1: i + 2]
+	if len(codon) < 3: break
+	
+	print(i, frame, codon, sep='\t')
+	
+print()
+
+for i in range(0, len(dna), 3):
+	for j in range(0, 3): 
+		codon = dna[i + j: i + j + 3]
+		if len(codon) < 3: break 
+		print(i + j + 1, j + 1, codon, sep='\t')
+
+print()
+
+	#the easier way that I was not smart enough to think of
+for i in range(len(dna)):
+	frame = i%3 + 1
+	codon = dna[i: i+3]
+	if len(codon) < 3: break
+	print(i + 1, frame, codon, sep='\t')
