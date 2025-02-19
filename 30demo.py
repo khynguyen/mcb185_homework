@@ -279,4 +279,4 @@ for i in range(1, len(nts) + 1):
 	codon = ''.join(codon)
 	if len(codon) < 3: break
 	
-	print(i, frame, codon)
+	print(i, frame, codon, sep='\t')
