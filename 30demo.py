@@ -319,7 +319,7 @@ print()
 
 	#the easier way that I was not smart enough to think of
 for i in range(len(dna)):
-	frame = i%3 + 1
+	frame = i % 3 + 1
 	codon = dna[i: i+3]
 	if len(codon) < 3: break
 	print(i + 1, frame, codon, sep='\t')
