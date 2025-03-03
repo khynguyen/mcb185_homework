@@ -32,7 +32,8 @@ for defline, seq in mcb185.read_fasta(file):
 	#backwards
 	counts = 1
 	for i in range(len(seq), 0, -1):	
-		codon = seq[i : i + 3]
+		codon = seq[i - 3 : i]
+		codon = codon[::-1]
 		aa = sequence.trans_ext(codon)
 		if aa == 'M': 
 			protein = 'M'
