@@ -76,19 +76,40 @@ for defline, seq in mcb185.read_fasta(sys.argv[1]):
 	print()
 	
 #assessment example
-counts = [0, 0, 0, 0, 0] #A, C, G, T, N
+nts = [0, 0, 0, 0, 0] #A, C, G, T, N
+total_len = 0 
+
 for defline, seq in mcb185.read_fasta(sys.argv[1]):
+	defwords = defline.split()
+	name = defwords[0]
+
+	length = len(seq)
+	total_len += length
+	
+	A = 0 
+	C = 0 
+	G = 0
+	T = 0
+	N = 0 
+
 	for nt in seq:
-		if nt == 'A':   counts[0] += 1
-		elif nt == 'C': counts[1] += 1
-		elif nt == 'G': counts[2] += 1
-		elif nt == 'T': counts[3] += 1
-		else: 			counts[4] += 1
+		if nt == 'A':   
+			nts[0] += 1 
+			A += 1
+		elif nt == 'C': 
+			nts[1] += 1 
+			C += 1
+		elif nt == 'G': 
+			nts[2] += 1 
+			G += 1
+		elif nt == 'T': 
+			nts[3] += 1 
+			T += 1
+		else: 
+			nts[4] += 1
+			N += 0
+	print(name, A/length, C/length, G/length, T/length)
 
-total = 0
-for nt in counts: total += nt
-
-print('average nt comp')
-for nt in counts:
-		print(nt / total, end=' ')
-print()
+print('average composition:', end=' ' )
+for nt in nts:
+	print(nt / total_len, end=' ')
