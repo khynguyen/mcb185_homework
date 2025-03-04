@@ -74,3 +74,21 @@ for defline, seq in mcb185.read_fasta(sys.argv[1]):
 	for nt in 'ACGTN':
 		print(seq.count(nt) / len(seq), end=' ')
 	print()
+	
+#assessment example
+counts = [0, 0, 0, 0, 0] #A, C, G, T, N
+for defline, seq in mcb185.read_fasta(sys.argv[1]):
+	for nt in seq:
+		if nt == 'A':   counts[0] += 1
+		elif nt == 'C': counts[1] += 1
+		elif nt == 'G': counts[2] += 1
+		elif nt == 'T': counts[3] += 1
+		else: 			counts[4] += 1
+
+total = 0
+for nt in counts: total += nt
+
+print('average nt comp')
+for nt in counts:
+		print(nt / total, end=' ')
+print()
