@@ -1,0 +1,24 @@
+#52kmercount.py by Karen Nguyen
+
+import sys
+import mcb185
+import itertools
+
+file = sys.argv[1]
+k = int(sys.argv[2])
+kcount = {}
+
+for defline, seq in mcb185.read_fasta(file):
+	for i in range(len(seq) -k +1): 
+		kmer = seq[i:i+k]
+		if kmer not in kcount: kcount[kmer] = 0 
+		kcount[kmer] += 1
+
+for kmer, n in kcount.items(): print(kmer, n)
+print()
+
+#finding missing kmer
+for nts in itertools.product('ACGT', repeat=k):
+	kmer = ''.join(nts)
+	if kmer in kcount: print(kmer, kcount[kmer])
+	else: 			   print(kmer, 0)
