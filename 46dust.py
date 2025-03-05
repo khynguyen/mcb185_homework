@@ -24,7 +24,6 @@ for defline, seq in mcb185.read_fasta(file):
 		for p in seq_comp:
 			if p == 0: continue
 			h -= p * math.log2(p)
-		print(i, h)
 		
 		if h >= e: dust += seq[i]
 		else: 	   dust += 'N'

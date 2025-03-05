@@ -2,6 +2,7 @@
 
 import random
 import sys
+import itertools #see line 104
 
 #demo in class 3/4/2025
 '''
@@ -72,7 +73,8 @@ for key in d: print(f'{key} says {d[key]}')
 for key, value in d.items(): print(key, 'says', value)
 for key, value in d.items(): print(f'{key} says {value}')
 
-for thing in d.items(): print(thing[0], 'says', thing[1]) #don't do this, always unpack
+##don't do this, ALWAYS UNPACK INSTEAD
+for thing in d.items(): print(thing[0], 'says', thing[1]) 
 
 print(d.keys())
 print(d.values())
@@ -91,3 +93,15 @@ def kd_dict(seq):
 
 print(kd_dict('IVIVIV'))
 print(kd_dict('MANSKDQPDMKWSDWI'))
+
+#alternative to 42ntcomp.py 
+'''
+count = {}
+for nt in seq:
+    if nt not in count: count[nt] = 0
+    count[nt] += 1
+'''
+
+#use itertools to find all possible combinations 
+for nts in itertools.product('ACGT', repeat=2): 
+	print(nts)
