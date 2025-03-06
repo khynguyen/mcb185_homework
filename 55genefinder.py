@@ -17,30 +17,44 @@ for defline, seq in mcb185.read_fasta(file):
 	
 	#forward
 	for i in range(start_for, len(seq)): 
-		codon_for = seq[i:i+3]	
+		codon_for = seq[start_for:start_for+3]	
+		
 		if codon_for == 'ATG': 	
-			for j in range(i, len(seq), 3):
+			for j in range(start_for, len(seq), 3):
 				codon = seq[j:j+3]
+				
 				if codon == 'TAA' or codon == 'TAG' or codon == 'TGA':
-					orf = seq[i:j+3]
+					orf = seq[start_for:j+3]
 					if len(orf) < orf_length: 
 						start_for = j + 3
 						break
-					print(orf)
+						
+					beg = start_for + 1
+					end = j + 3 
+					print('+', beg, end)
 					start_for = j + 3
 					break 
+		
+		start_for += 1
 	
-	#forward
+	
+	#backwards
 	for i in range(start_rev, len(revseq)): 
-		codon_for = revseq[i:i+3]	
-		if codon_for == 'ATG': 	
-			for j in range(i, len(revseq), 3):
+		codon_rev = revseq[start_rev:start_rev+3]	
+		
+		if codon_rev == 'ATG': 	
+			for j in range(start_rev, len(revseq), 3):
 				codon = revseq[j:j+3]
+				
 				if codon == 'TAA' or codon == 'TAG' or codon == 'TGA':
-					orf = revseq[i:j+3]
+					orf = revseq[start_rev:j+3]
 					if len(orf) < orf_length: 
 						start_rev = j + 3
 						break
-					print(orf)
+					
+					beg = len(seq) - j - 2
+					end = len(seq) - start_rev 
+					print('-', beg, end) 
 					start_rev = j + 3
 					break 
+		start_rev += 1
