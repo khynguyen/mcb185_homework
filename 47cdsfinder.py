@@ -10,6 +10,7 @@ length = int(sys.argv[2])
 for defline, seq in mcb185.read_fasta(file):
 	defwords = defline.split()
 	name = defwords[0]
+	revseq = sequence.revcomp(seq)
 	
 	#forwards
 	counts = 1
@@ -29,16 +30,16 @@ for defline, seq in mcb185.read_fasta(file):
 			if len(protein) >= length: 
 				print(name, f' forward protein #{counts}\n', protein)
 				counts += 1
+				
 	#backwards
 	counts = 1
-	for i in range(len(seq), 0, -1):	
-		codon = seq[i - 3 : i]
-		codon = codon[::-1]
+	for i in range(len(revseq)):
+		codon = revseq[i : i + 3]
 		aa = sequence.trans_ext(codon)
 		if aa == 'M': 
 			protein = 'M'
-			for j in range(i + 3, len(seq), 3):
-				codon = seq[j: j+3]
+			for j in range(i + 3, len(revseq), 3):
+				codon = revseq[j: j+3]
 				aa = sequence.trans_ext(codon)
 				if aa == '*': 
 					protein += aa
