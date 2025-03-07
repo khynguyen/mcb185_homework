@@ -12,7 +12,7 @@ b = int(sys.argv[4])
 value_diff = 765 #max possible difference to have, 255*3 
 color_name = 'blank'
 
-with open(colorfile, 'rt') as fp:
+with open(colorfile) as fp:
 	for line in fp:
 		colors = line.split() #split to get name and values
 		color_values = colors[2].split(',') #get just values
