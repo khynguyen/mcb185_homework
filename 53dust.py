@@ -39,5 +39,5 @@ for defline, seq in mcb185.read_fasta(arg.file):
 				for j in range(i, i + arg.size): masked_seq[j] = 'N'
 	print(defline)
 	mask = ''.join(masked_seq)
-	for i in range(0, len(mask), 60):
+	for i in range(0, len(mask), arg.wrap):
 		print(mask[i:i+arg.wrap])
