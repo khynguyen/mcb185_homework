@@ -93,3 +93,15 @@ def kd_dict(seq):
     kd = 0
     for aa in seq: kd += kdtable[aa]
     return kd/len(seq)
+
+def tm(seq):
+	a = seq.count('A')
+	c = seq.count('C')
+	g = seq.count('G')
+	t = seq.count('T')
+	if a + c + t + g <= 13:
+		tm = (a + t)*2 + (g + c)*4
+		return tm
+	else:
+		tm = 64.9 + 41*(g + c - 16.4) / (a + t + c + g)
+		return tm
