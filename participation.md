@@ -76,3 +76,5 @@ more than one point per category. There is a maximum of 5 points each week.
 	+ Answered a question in Discord
 	+ Total points: 5
 - Week 10
+	+ Went to class on Tuesday
+	+ Went to class on Thursday
