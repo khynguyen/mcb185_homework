@@ -29,12 +29,13 @@ with gzip.open(sys.argv[1], 'rt') as fp:
 		if f[0] == 'CDS':
 			cds = f[1]
 			if 'complement' in cds:
-				range = cds.rstrip().strip('complement()').split('..')
-				rev_genes.append(range)
-			if 'join' in cds: continue #COME BACK FOR THIS
+				if 'join' in cds: continue #COME BACK FOR THIS
+				ranges = cds.rstrip().strip('complement(').strip(')').split('..')
+				rev_genes.append(ranges)
 			else:
-				range = cds.rstrip().split('..')
-				for_genes.append(range)
+				if 'join' in cds: continue #COME BACK FOR THIS
+				ranges = cds.rstrip().split('..')
+				for_genes.append(ranges)
 			 			
 		#seq begins after the ORIGIN line
 		if line.startswith('ORIGIN'): 
@@ -67,16 +68,18 @@ for orf in for_genes:
 		elif kozak[i] == 'g': g[i] += 1
 		elif kozak[i] == 't': t[i] += 1
 
-'''
 for orf in rev_genes:
 	start = int(orf[0])
 	kozak = revseq[start - 8 : start + 7]
 	
-	for i in range(len(kozak)):
+	for i in range(15):
 		if kozak[i] == 'a': a[i] += 1
 		elif kozak[i] == 'c': c[i] += 1
 		elif kozak[i] == 'g': g[i] += 1
 		elif kozak[i] == 't': t[i] += 1
-		
-print(a, c, g, t, sep='\n')
-'''
+
+	
+print(f'{"PO":<8}', 'A   ', 'C   ', 'G   ', 'T   ')		
+for i in range(15):
+	print(f'{i+1:<8}', a[i], c[i], g[i], t[i])
+
