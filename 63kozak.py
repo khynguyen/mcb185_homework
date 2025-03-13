@@ -1,6 +1,6 @@
 #63kozak.py by Karen Nguyen 
 
-##got help from Catrinel, thanks Cat <3
+##got help from Catrinel, thanks Cat! 
 ##kozak sequence: 5'-(gcc)gccRccAUGG-3'
 
 import gzip 
@@ -19,7 +19,7 @@ def revcomp(dna):
 for_genes = []
 rev_genes = [] 
 sequence = [] 
-get_seq = False #flag to indicate sequence in file
+get_seq = False #flag to start collecting sequence
 
 #get sequence and orfs from file
 with gzip.open(sys.argv[1], 'rt') as fp:
@@ -68,6 +68,7 @@ for orf in for_genes:
 		elif kozak[i] == 'g': g[i] += 1
 		elif kozak[i] == 't': t[i] += 1
 
+'''
 for orf in rev_genes:
 	start = int(orf[0])
 	kozak = revseq[start - 8 : start + 7]
@@ -77,7 +78,7 @@ for orf in rev_genes:
 		elif kozak[i] == 'c': c[i] += 1
 		elif kozak[i] == 'g': g[i] += 1
 		elif kozak[i] == 't': t[i] += 1
-
+'''
 	
 print(f'{"PO":<8}', 'A   ', 'C   ', 'G   ', 'T   ')		
 for i in range(15):
