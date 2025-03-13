@@ -28,7 +28,6 @@ for key, value in variants.items():
 				if beg > var: break
 				if var > beg and var < end and region not in regions:
 					regions.append(region)
+		if regions == []: continue
 		regions = ', '.join(regions)
 		print(key, var, regions, sep='\t')
-		
-		
