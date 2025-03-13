@@ -30,9 +30,8 @@ more than one point per category. There is a maximum of 5 points each week.
 - Week 1
 	+ Went to class on Tuesday
 	+ Went to class on Thursday
-	+ Introduced myself to Jule (Joule?), who was sitting on my right
-	+ Introduced myself to Liane (?) on my left
-	+ Total points: 4
+	+ Introduced myself to Jule (Joule?)
+	+ Total points: 3
 - Week 2
 	+ Went to class on Tuesday
 	+ Went to class on Thursday
@@ -78,3 +77,4 @@ more than one point per category. There is a maximum of 5 points each week.
 - Week 10
 	+ Went to class on Tuesday
 	+ Went to class on Thursday
+	+ Joined Cat's Coderie on Wednesday night 
