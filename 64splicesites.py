@@ -4,11 +4,20 @@ import mcb185
 import sys 
 import gzip
 
+def comp(dna):
+	rc = []
+	for nt in dna:
+		if nt == 'A':   rc.append('T')
+		elif nt == 'C': rc.append('G')
+		elif nt == 'G': rc.append('C')
+		elif nt == 'T': rc.append('A')
+		else: 			rc.append('N')
+	return ''.join(rc)
+
 fasta = sys.argv[1]
 gff = sys.argv[2]
 
-donor_sites = {}
-acceptor_sites = {}
+splice_sites = {}
 
 A_acc = [0] * 7
 C_acc = [0] * 7
@@ -23,32 +32,36 @@ T_don = [0] * 7
 with gzip.open(gff, 'rt') as fp:
 	for line in fp:
 		f = line.rstrip().split()
-		if f[2] == 'intron': 
-			if f[0] not in donor_sites: donor_sites[f[0]] = []
-			if f[0] not in acceptor_sites: acceptor_sites[f[0]] = []
-			donor_sites[f[0]].append(int(f[3]))
-			acceptor_sites[f[0]].append(int(f[4]))
+		if f[1] == 'RNASeq_splice': 
+			if f[0] not in splice_sites: splice_sites[f[0]] = []
+			sites = int(f[3]), int(f[4]), f[6]
+			splice_sites[f[0]].append(sites)
 
 for defline, seq in mcb185.read_fasta(fasta):
 	defwords = defline.strip('>').split()
 	chrom = defwords[0]
 	if chrom == 'MtDNA': continue
+	revseq = comp(seq)
 	
-	for acceptor in acceptor_sites[chrom]:
-		site = seq[acceptor - 7: acceptor]
-		for i in range(len(site)):
-			if site[i] == 'A': A_acc[i] += 1
-			elif site[i] == 'C': C_acc[i] += 1
-			elif site[i] == 'G': G_acc[i] += 1
-			elif site[i] == 'T': T_acc[i] += 1
-	
-	for donor in donor_sites[chrom]:
-		site = seq[donor - 1: donor + 6]
-		for i in range(len(site)):
-			if site[i] == 'A': A_don[i] += 1
-			elif site[i] == 'C': C_don[i] += 1
-			elif site[i] == 'G': G_don[i] += 1
-			elif site[i] == 'T': T_don[i] += 1
+	for sites in splice_sites[chrom]:
+		donor, acceptor, strand = sites
+		if sites[2] == '+':
+			acc_site = seq[acceptor - 7: acceptor]
+			don_site = seq[donor - 1: donor + 6]
+		else: 
+			acc_site = revseq[acceptor - 7: acceptor]
+			don_site = revseq[donor - 1: donor + 6]
+		
+		for i in range(7):
+			if acc_site[i] == 'A': A_acc[i] += 1
+			elif acc_site[i] == 'C': C_acc[i] += 1
+			elif acc_site[i] == 'G': G_acc[i] += 1
+			elif acc_site[i] == 'T': T_acc[i] += 1	
+		
+			if don_site[i] == 'A': A_don[i] += 1
+			elif don_site[i] == 'C': C_don[i] += 1
+			elif don_site[i] == 'G': G_don[i] += 1
+			elif don_site[i] == 'T': T_don[i] += 1
 
 print('AC DEMO1', 'XX', 'ID ACC', 'XX', 'DE Splice Acceptor', sep='\n')
 for i in range(7):
