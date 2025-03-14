@@ -99,7 +99,9 @@ for frame in rev_genes:
 			elif kozak[i] == 'g': G[i] += 1
 			elif kozak[i] == 't': T[i] += 1
 
+
 print('KOZAK SEQ NT COUNTS', 'XX', 'ID ECOLI', 'XX', sep='\n')
 print(f'{"PO":<8}', f'{"A": <8}', f'{"C": <8}', f'{"G": <8}', f'{"T": <8}')
+
 for i in range(15):
 	print(f'{i+1:<8}', f'{A[i]: <8}', f'{C[i]: <8}', f'{G[i]: <8}', f'{T[i]: <8}')
