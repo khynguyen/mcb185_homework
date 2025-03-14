@@ -1,14 +1,12 @@
 #63kozak.py by Karen Nguyen 
 
-##got help from Catrinel, thanks Cat! 
-##kozak sequence: 5'-(gcc)gccRccAUGG-3'
-
 import gzip 
 import sys
 
+#adjusted revcomp function to work on lowercase characters
 def revcomp(dna):
 	rc = []
-	for nt in dna[::-1]:
+	for nt in dna:
 		if nt == 'a':   rc.append('t')
 		elif nt == 'c': rc.append('g')
 		elif nt == 'g': rc.append('c')
@@ -16,71 +14,92 @@ def revcomp(dna):
 		else: 			rc.append('N')
 	return ''.join(rc)
 
+#get seq and orfs
 for_genes = []
-rev_genes = [] 
-sequence = [] 
-get_seq = False #flag to start collecting sequence
+rev_genes = []
+seq_frags = []
+get_seq = False
 
-#get sequence and orfs from file
 with gzip.open(sys.argv[1], 'rt') as fp:
-	for line in fp:	
+	for line in fp:
 		f = line.split()
 		
+		#get positions of cds 
 		if f[0] == 'CDS':
-			cds = f[1]
-			if 'complement' in cds:
-				if 'join' in cds: continue #COME BACK FOR THIS
-				ranges = cds.rstrip().strip('complement(').strip(')').split('..')
-				rev_genes.append(ranges)
-			else:
-				if 'join' in cds: continue #COME BACK FOR THIS
-				ranges = cds.rstrip().split('..')
-				for_genes.append(ranges)
-			 			
-		#seq begins after the ORIGIN line
-		if line.startswith('ORIGIN'): 
-			get_seq = True 
-			continue 
+			if 'complement' in f[1]: 
+				cds = f[1].strip('complement(').strip(')')
+				rev_genes.append(cds)
+			else: for_genes.append(f[1])
 		
-		#append joined seq lines to sequence list
-		if get_seq: 
-			if '//' in line: break  #seq ends right before a // line
-			frag = ''.join(f[1:]) #skip the position marker at the beginning 
-			sequence.append(frag)
+		#sequence begins after ORIGIN, set flag to True
+		if line.startswith('ORIGIN'): 
+			get_seq = True
+			continue
+		
+		#once True, put seq fragments into list	
+		if get_seq:
+			seq = ''.join(f[1:])
+			seq_frags.append(seq)
 
-#join all the fragments together 
-sequence = ''.join(sequence)
+#get string of both dna strands
+sequence = ''.join(seq_frags)
 revseq = revcomp(sequence)
 
-#get counts for kozak seq 
-a = [0] * 15 
-c = [0] * 15
-g = [0] * 15
-t = [0] * 15
+#nt counting
+A = [0] * 15
+C = [0] * 15
+G = [0] * 15
+T = [0] * 15
 
-for orf in for_genes:
-	start = int(orf[0])
-	kozak = sequence[start - 8 : start + 7]
-	
-	for i in range(15):
-		if kozak[i] == 'a': a[i] += 1
-		elif kozak[i] == 'c': c[i] += 1
-		elif kozak[i] == 'g': g[i] += 1
-		elif kozak[i] == 't': t[i] += 1
+for frame in for_genes:
+	if 'join' in frame:
+		sections =  frame.strip('join(').strip(')').split(',')
+		beg, end = sections[0].split('..')
+		start = int(beg)
+		kozak = sequence[start - 8 : start + 7]
 
-'''
-for orf in rev_genes:
-	start = int(orf[0])
-	kozak = revseq[start - 8 : start + 7]
-	
-	for i in range(15):
-		if kozak[i] == 'a': a[i] += 1
-		elif kozak[i] == 'c': c[i] += 1
-		elif kozak[i] == 'g': g[i] += 1
-		elif kozak[i] == 't': t[i] += 1
-'''
-	
-print(f'{"PO":<8}', 'A   ', 'C   ', 'G   ', 'T   ')		
+		for i in range(15):
+			if kozak[i] == 'a': A[i] += 1
+			elif kozak[i] == 'c': C[i] += 1
+			elif kozak[i] == 'g': G[i] += 1
+			elif kozak[i] == 't': T[i] += 1
+			
+	else: 
+		beg, end = frame.split('..')
+		start = int(beg)
+		kozak = sequence[start - 8 : start + 7]
+		for i in range(15):
+			if kozak[i] == 'a': A[i] += 1
+			elif kozak[i] == 'c': C[i] += 1
+			elif kozak[i] == 'g': G[i] += 1
+			elif kozak[i] == 't': T[i] += 1
+			
+for frame in rev_genes:
+	if 'join' in frame:
+		sections =  frame.strip('join(').split(',')
+		beg, end = sections[0].split('..')
+		start = int(end)
+		kozak = revseq[start - 8 : start + 7]
+
+		for i in range(15):
+			if kozak[i] == 'a': A[i] += 1
+			elif kozak[i] == 'c': C[i] += 1
+			elif kozak[i] == 'g': G[i] += 1
+			elif kozak[i] == 't': T[i] += 1
+			
+	else: 
+		beg, end = frame.split('..')
+		start = int(end)
+		kozak = revseq[start - 8 : start + 7]
+		kozak = kozak[::-1]
+		#print(kozak)
+		for i in range(15):
+			if kozak[i] == 'a': A[i] += 1
+			elif kozak[i] == 'c': C[i] += 1
+			elif kozak[i] == 'g': G[i] += 1
+			elif kozak[i] == 't': T[i] += 1
+
+print('KOZAK SEQ NT COUNTS', 'XX', 'ID ECOLI', 'XX', sep='\n')
+print(f'{"PO":<8}', f'{"A": <8}', f'{"C": <8}', f'{"G": <8}', f'{"T": <8}')
 for i in range(15):
-	print(f'{i+1:<8}', a[i], c[i], g[i], t[i])
-
+	print(f'{i+1:<8}', f'{A[i]: <8}', f'{C[i]: <8}', f'{G[i]: <8}', f'{T[i]: <8}')
