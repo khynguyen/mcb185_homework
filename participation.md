@@ -78,6 +78,7 @@ more than one point per category. There is a maximum of 5 points each week.
 	+ Went to class on Tuesday
 	+ Went to class on Thursday
 	+ Joined Cat's Coderie on Wednesday night 
-	+ Total points: 3
+	+ Asked a question in Discord 
+	+ Total points: 4
 	
-Total points: 32
+Total points: 33
