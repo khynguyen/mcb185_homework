@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 #64splicesites.py by Karen Nguyen 
 
 import mcb185

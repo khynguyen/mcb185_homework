@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 #46dust.py by Karen Nguyen
 
 import sys

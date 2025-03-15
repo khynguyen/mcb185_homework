@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 #10demo.py by Karen Nguyen
 
 #printing practice
